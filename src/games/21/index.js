@@ -4,8 +4,6 @@ module.exports = function() {
 	var messages = require('./messages');
 	var stats = require('../../stats/');
 
-	var path = 'data/rank_21.json';
-
 	var state = {
 		defaults: {
 			bank: 100,
@@ -51,9 +49,7 @@ module.exports = function() {
 	}
 
 	var getCardValue = function(card) {
-		if (card === 'J') return 10;
-		if (card === 'Q') return 10;
-		if (card === 'K') return 10;
+		if (['J', 'Q', 'K'].indexOf(card) +1) return 10;
 		if (card === 'A') return 11;
 		return card;
 	}
