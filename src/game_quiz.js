@@ -19,13 +19,12 @@ module.exports = function (robot) {
 				});
 			}
 		},
-		//TODO
-		// interval: {
-		// 	time: 20 * 1000,
-		// 	callback: function(res) {
-		// 		res.reply(messages.timeLeftWarning);
-		// 	}
-		// }
+		interval: {
+			time: 20 * 1000,
+			callback: function(res) {
+				res.reply(messages.timeLeftWarning);
+			}
+		}
 	});
 
 	var r = {
