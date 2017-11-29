@@ -25,7 +25,7 @@ module.exports = function(payload) {
 	};
 
 	var sessionInterval = function(res) {
-		return id = setInterval(function() {
+		return setInterval(function() {
 			interval.callback(res);
 		}, interval.time);
 	}
