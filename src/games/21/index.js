@@ -95,7 +95,7 @@ module.exports = function() {
 
 	var getBet = function() {
 		var bet = (state.res.match[0]).match(/^!21 (?:start|s)(\s[0-9]*)?$/)[1];
-		return typeof bet === 'undefined' ? state.defaults.bet : bet;
+		return typeof bet === 'undefined' ? state.defaults.bet : parseInt(bet);
 	}
 
 	var updateBank = function() {
@@ -154,7 +154,7 @@ module.exports = function() {
 		if (typeof end !== 'undefined') {
 			draw += '\n\n';
 			draw += '@'+ getPlayerName() +' ';
-			if (result === 0) draw += messages.win;
+			if (result === 0) draw += state.hand.player.length === 2 ? messages.win21 : messages.win;
 			if (result === 1) draw += messages.push;
 			if (result === 2) draw += messages.lose;
 			draw += '\n\n';

@@ -1,5 +1,5 @@
 // Author
-// Monkeys
+// aneves
 
 module.exports = function(robot) {
 	var messages = require('./games/hang/messages');
@@ -27,16 +27,20 @@ module.exports = function(robot) {
 	});
 
 	var r = {
-		help: /^!hang (help|h)$/,
-		start: /^!hang (start|s)$/,
-		play: /^!hang (play|p) [a-z]{1}$/,
-		guess: /^!hang (guess|g) [a-z]{2,}$/,
-		state: /^!hang(?:\sstate)?$/,
-		stats: /^!hang stats?$/,
+		help: /^!hang$/,
+		start: /^!hang (?:start|s)$/,
+		play: /^!hang (?:play|p) [a-z]{1}$/,
+		guess: /^!hang (?:guess|g) [a-z]{2,}$/,
+		stats: /^!hang stats$/,
 	};
 
 	robot.hear(r.help, function(res) {
-		res.reply(messages.help);
+		if (session.gameInstance(res)) {
+			var r = session.state(res);
+			res[r[0]](r[1]);
+		} else {
+			res.send(messages.help);
+		}
 	});
 
     robot.hear(r.start, function(res) {
@@ -51,11 +55,6 @@ module.exports = function(robot) {
 
 	robot.hear(r.guess, function(res) {
 		var r = session.action('play', res);
-		res[r[0]](r[1]);
-	});
-
-	robot.hear(r.state, function(res) {
-		var r = session.state(res);
 		res[r[0]](r[1]);
 	});
 

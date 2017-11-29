@@ -1,5 +1,5 @@
 // Author
-// Monkeys
+// aneves, centeno
 
 module.exports = function(robot) {
 	var messages = require('./games/tic/messages');
@@ -12,15 +12,15 @@ module.exports = function(robot) {
 	});
 
 	var r = {
-		help: /^!tic(?:\s(help|h))?$/,
-		start: /^!tic (start|s)$/,
-		join: /^!tic (join|j)$/,
-		play: /^!tic (play|p) [1-9]$/,
-		stats: /^!tic stats?$/,
+		help: /^!tic$/,
+		start: /^!tic (?:start|s)$/,
+		join: /^!tic (?:join|j)$/,
+		play: /^!tic (?:play|p) [1-9]{1}$/,
+		stats: /^!tic stats$/,
 	};
 
 	robot.hear(r.help, function(res) {
-		res.reply(messages.help);
+		res.send(messages.help);
 	});
 
 	robot.hear(r.start, function(res) {
