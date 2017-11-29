@@ -1,5 +1,5 @@
 // Author
-// aneves
+// aneves, centeno
 
 module.exports = function(robot) {
 	var messages = require('./games/hang/messages');

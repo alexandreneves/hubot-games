@@ -1,5 +1,5 @@
 // Author
-// Monkeys
+// tiagocunha
 
 module.exports = function(robot) {
 	var Game = require('./games/24');
