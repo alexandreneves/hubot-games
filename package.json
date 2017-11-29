@@ -1,0 +1,21 @@
+{
+  "name": "hubot-games",
+  "version": "0.1.2",
+  "description": "",
+  "author": "monkeys",
+  "keywords": [
+    "hubot-games",
+    "hubot",
+    "games",
+    "bot",
+    "24",
+    "connect4",
+    "hangman",
+    "tictactoe"
+  ],
+  "main": "index.coffee",
+  "license": "ISC",
+  "dependencies": {
+    "knuth-shuffle": "^1.0.8"
+  }
+}
