@@ -1,6 +1,6 @@
 # HUBOT GAMES
 
-Game library for your (hu)bot! Hangman, Blackjack, TicTacToe, 24, ...!
+Game library for your (hu)bot! Hangman, Blackjack, TicTacToe, Quiz, 24, ...!
 
 ## INSTALL
 
