@@ -108,7 +108,7 @@ module.exports = function() {
 		return typeof bet === 'undefined' ? state.defaults.bet : parseInt(bet);
 	}
 
-	var hasBlackjack = function(hang) {
+	var hasBlackjack = function(hand) {
 		return getCount(hand) === 21 && hand.length === 2;
 	}
 
