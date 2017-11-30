@@ -176,6 +176,11 @@ module.exports = function() {
 		state.bank = getBankBalance();
 		state.bet = getBet();
 
+		if (state.bet < state.defaults.bet) {
+			end();
+			return ['reply', messages.betInvalid];
+		}
+
 		// check funds
 		if (state.bet > state.bank) {
 			end();

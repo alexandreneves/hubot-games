@@ -5,5 +5,6 @@ module.exports = {
 	win21: 'blackjack, you win',
 	push: 'push',
 	lose: 'you lose',
-	bankEmpty: 'no accounts'
+	bankEmpty: 'no accounts',
+	betInvalid: 'bet not allowed'
 };
