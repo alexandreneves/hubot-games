@@ -150,7 +150,14 @@ module.exports = function() {
 		if (typeof end !== 'undefined') {
 			draw += '\n\n';
 			draw += '@'+ getPlayerName() +' ';
-			if (result === 0) draw += state.hand.player.length === 2 ? messages.win21 : messages.win;
+
+			if (result === 0) {
+				if (getCount(state.hand.player) === 21 && state.hand.player.length === 2) {
+					draw += messages.win21;
+				} else {
+					draw += messages.win;
+				}
+			}
 			if (result === 1) draw += messages.push;
 			if (result === 2) draw += messages.lose;
 			draw += '\n\n';

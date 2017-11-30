@@ -47,7 +47,7 @@ module.exports = function(robot) {
 		var payload = '';
 
 		for (var p in data) {
-			if (typeof data[p].bank !== 'undefined') payload = p +': '+ data[p].bank +'\n';
+			if (typeof data[p].bank !== 'undefined') payload += p +': '+ data[p].bank +'\n';
 		}
 
 		res.send(payload);
