@@ -21,6 +21,7 @@ module.exports = function(robot) {
 		double: /^!21 (?:double|d)$/,
 		split: /^!21 (?:split|sp)$/,
 		insurance: /^!21 (?:insurance|i)$/,
+		surrender: /^!21 (?:surrender|su)$/,
 		bank: /^!21 bank$/,
 		stats: /^!21 stats$/,
 	};
@@ -49,6 +50,21 @@ module.exports = function(robot) {
 		res[r[0]](r[1]);
 	});
 
+	// robot.hear(r.split, function(res) {
+	// 	var r = session.action('split', res);
+	// 	res[r[0]](r[1]);
+	// });
+	//
+	// robot.hear(r.insurance, function(res) {
+	// 	var r = session.action('insurance', res);
+	// 	res[r[0]](r[1]);
+	// });
+	//
+	// robot.hear(r.surrender, function(res) {
+	// 	var r = session.action('surrender', res);
+	// 	res[r[0]](r[1]);
+	// });
+
 	robot.hear(r.bank, function(res) {
 		var data = db.get('21');
 		var payload = '';
@@ -57,9 +73,7 @@ module.exports = function(robot) {
 			if (typeof data[p].bank !== 'undefined') payload += p +': '+ data[p].bank +'\n';
 		}
 
-		payload = '```'+ payload  +'```';
-
-		res.reply(payload ? payload : messages.bankEmpty);
+		res.reply(payload ? '```'+ payload  +'```' : messages.bankEmpty);
 	});
 
 	robot.hear(r.stats, function(res) {

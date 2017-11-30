@@ -260,5 +260,9 @@ module.exports = function() {
 		state.res = res;
 	}
 
-	return { start, hit, stand, double, split, insurance };
+	var surrender = function(res) {
+		state.res = res;
+	}
+
+	return { start, hit, stand, double, split, insurance, surrender };
 }
