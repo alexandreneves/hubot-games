@@ -106,13 +106,11 @@ module.exports = function() {
         var guess = res.match[0].trim().split('!quiz p ')[1];
         var result = checkAnswer(parseInt(guess));
 
-        for (var i = 0; i < state.level; i++) {
-            stats.update({
-                game: 'quiz',
-                player: state.player,
-                type: result ? 0 : 2
-            });
-        }
+        stats.update({
+            game: 'quiz',
+            player: state.player,
+            type: result ? 0 : 2
+        });
 
         end(res);
         return (result) ? ['reply', messages.correctAnswer] : 
