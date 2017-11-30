@@ -17,6 +17,7 @@ module.exports = function() {
 			player: [],
 			dealer: [],
 		},
+		credit: false,
 		payload: null,
 		res: null,
 	};
@@ -181,6 +182,7 @@ module.exports = function() {
 			if (result === 2) draw += messages.lose;
 			draw += '\n\n';
 			draw += 'bank: '+ state.bank;
+			if (result === 0 && state.credit) draw += messages.creditDeducted
 		}
 
 		return '```'+ draw +'```';
@@ -196,9 +198,8 @@ module.exports = function() {
 		state.bet = getBet();
 
 		if (state.bank < state.defaults.bet) { // user has insufficient funds
-			// give 5 credit
+			state.credit = true; // default bet credited
 			state.res.send(messages.insufficientFunds);
-
 		} else if (state.bet < state.defaults.bet) { // check if bet is valid
 			end();
 			return ['reply', messages.betInvalid];

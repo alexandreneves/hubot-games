@@ -6,5 +6,6 @@ module.exports = {
 	push: 'push',
 	lose: 'you lose',
 	bankEmpty: 'no accounts',
-	betInvalid: 'bet not allowed'
+	betInvalid: 'bet not allowed',
+	creditDeducted: ' (credit deducted)'
 };
