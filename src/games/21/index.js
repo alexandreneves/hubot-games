@@ -245,6 +245,11 @@ module.exports = function() {
 
 	var double = function(res) {
 		state.res = res;
+		state.bank = state.bank - state.bet;
+		state.bet *= 2;
+		state.res.reply(messages.double.replace('{0}', state.bet));
+		state.hand.player.push(getCard());
+		return dealerMove();
 	}
 
 	var split = function(res) {

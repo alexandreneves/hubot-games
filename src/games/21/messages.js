@@ -7,5 +7,6 @@ module.exports = {
 	lose: 'you lose',
 	bankEmpty: 'no accounts',
 	betInvalid: 'bet not allowed',
-	creditDeducted: ' (credit deducted)'
+	creditDeducted: ' (credit deducted)',
+	double: 'doubled, bet: {0}'
 };

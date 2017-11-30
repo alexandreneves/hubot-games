@@ -44,6 +44,11 @@ module.exports = function(robot) {
 		res[r[0]](r[1]);
 	});
 
+	robot.hear(r.double, function(res) {
+		var r = session.action('double', res);
+		res[r[0]](r[1]);
+	});
+
 	robot.hear(r.bank, function(res) {
 		var data = db.get('21');
 		var payload = '';
@@ -51,7 +56,7 @@ module.exports = function(robot) {
 		for (var p in data) {
 			if (typeof data[p].bank !== 'undefined') payload += p +': '+ data[p].bank +'\n';
 		}
-		
+
 		payload = '```'+ payload  +'```';
 
 		res.reply(payload ? payload : messages.bankEmpty);
