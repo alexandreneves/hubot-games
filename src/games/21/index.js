@@ -245,10 +245,20 @@ module.exports = function() {
 
 	var double = function(res) {
 		state.res = res;
+
+		// update bank & bet
 		state.bank = state.bank - state.bet;
 		state.bet *= 2;
+
+		// send bet feedback
 		state.res.reply(messages.double.replace('{0}', state.bet));
+
+		// deal last card
 		state.hand.player.push(getCard());
+
+		// check bust
+		if (getCount(state.hand.player) > 21) return playerLose();
+
 		return dealerMove();
 	}
 
