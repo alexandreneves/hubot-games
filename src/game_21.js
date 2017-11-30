@@ -50,7 +50,7 @@ module.exports = function(robot) {
 			if (typeof data[p].bank !== 'undefined') payload += p +': '+ data[p].bank +'\n';
 		}
 
-		res.send(payload.lenght ? payload : messages.bankEmpty);
+		res.send(payload ? payload : messages.bankEmpty);
 	});
 
 	robot.hear(r.stats, function(res) {

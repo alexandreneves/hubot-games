@@ -143,9 +143,9 @@ module.exports = function() {
 	var draw = function(end, result) {
 		var draw = '';
 
-		draw += 'dealer - '+ state.hand.dealer.join(', ') + ' ('+ getCount(state.hand.dealer) +')';
+		draw += 'dealer: '+ state.hand.dealer.join(', ') + ' ('+ getCount(state.hand.dealer) +')';
 		draw += '\n';
-		draw += 'player - '+ state.hand.player.join(', ') + ' ('+ getCount(state.hand.player) +')';
+		draw += 'player: '+ state.hand.player.join(', ') + ' ('+ getCount(state.hand.player) +')';
 
 		if (typeof end !== 'undefined') {
 			draw += '\n\n';
