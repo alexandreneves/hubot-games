@@ -58,10 +58,23 @@ module.exports = function() {
 		var countPlayer = getCount(state.hand.player);
 		var countDealer = getCount(state.hand.dealer);
 
-		if (countDealer > 21) return playerWin();
-		if (countPlayer > countDealer) return playerWin();
-		if (countPlayer > 21 || countDealer > countPlayer) return playerLose();
-		if (countPlayer === countDealer) return playerPush();
+		if (countPlayer > 21) return playerLose(); // player bust
+		if (countDealer > 21) return playerWin(); // dealer bust
+		if (countPlayer > countDealer) return playerWin(); // player has better hand
+		if (countDealer > countPlayer) return playerLose(); // dealer has better hand
+		if (countPlayer === countDealer) {
+			if (countPlayer === 21) { // check for blackjacks
+				var cardsPlayer = state.hand.player.length;
+				var cardsDealer = state.hand.dealer.length;
+
+				if (cardsPlayer === cardsDealer) return playerPush(); // tie
+				if (cardsPlayer === 2) return playerWin();
+				if (cardsDealer === 2) return playerLose();
+			}
+
+			// no blackjacks, push
+			return playerPush();
+		}
 	}
 
 	var getCount = function(hand) {
@@ -108,8 +121,8 @@ module.exports = function() {
 		});
 	}
 
-	var playerWin = function(multiplier) {
-		if (typeof multiplier === 'undefined') multiplier = 2;
+	var playerWin = function() {
+		var multiplier = getCount(state.hand.player) === 21 ? 2.5 : 2;
 		state.bank += state.bet * multiplier;
 		updateBank();
 		updateStats(0);
@@ -134,6 +147,12 @@ module.exports = function() {
 
 	var dealerMove = function() {
 		while (getCount(state.hand.dealer) < 17) {
+			state.hand.dealer.push(getCard());
+		}
+
+		// check for s17
+		var acesCount = ((state.hand.dealer.join('')).match(/a/ig) || []).length;
+		if (getCount(state.hand.dealer) === 17 && acesCount === 1) {
 			state.hand.dealer.push(getCard());
 		}
 
@@ -197,14 +216,9 @@ module.exports = function() {
 		state.hand.player.push(getCard());
 		state.hand.dealer.push(getCard());
 		state.hand.player.push(getCard());
-		// state.hand.dealer.push(getCard());
 
-		var countPlayer = getCount(state.hand.player);
-		// var countDealer = getCount(state.hand.dealer);
-
-		// if (countPlayer === 21 && countDealer === 21) return playerPush();
-		if (countPlayer === 21) return playerWin(2.5);
-		// if (countDealer === 21) return playerLose();
+		// check for blackjack
+		if (getCount(state.hand.player) === 21) return dealerMove();
 
 		return ['send', draw()];
 	};
