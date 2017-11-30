@@ -20,7 +20,7 @@ module.exports = function(robot) {
 	};
 
 	robot.hear(r.help, function(res) {
-		res.send(messages.help);
+		res.send('```'+ messages.help +'```');
 	});
 
 	robot.hear(r.start, function(res) {

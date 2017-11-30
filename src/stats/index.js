@@ -42,7 +42,7 @@ module.exports = new function() {
 			payload += '\n';
 		}
 
-		return payload;
+		return '```'+ payload + '```';
 	};
 
 	var update = function(payload) {

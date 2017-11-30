@@ -39,7 +39,7 @@ module.exports = function(robot) {
 			var r = session.state(res);
 			res[r[0]](r[1]);
 		} else {
-			res.send(messages.help);
+			res.send('```'+ messages.help +'```');
 		}
 	});
 

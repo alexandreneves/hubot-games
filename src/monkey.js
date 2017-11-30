@@ -7,21 +7,7 @@ module.exports = function(robot) {
 		help: /^!help/g,
 	};
 
-	var help = 'Hello @{0}\n \
-		\n \
-		!calc: Calculator (e.g. !calc 1+1)\n \
-		\n \
-		!21: Blackjack\n \
-		!24: 24\n \
-		!con4: Connect 4\n \
-		!hang: Hangman\n \
-		!quiz: Quiz\n \
-		!tic: TicTacToe\n \
-		\n \
-		Type - !{game} help - for help\n \
-		\n \
-		ktksbye :monkey_face:  \
-	';
+	var help = '!calc: Calculator (e.g. !calc 1+1)\n\n!21: Blackjack\n!24: 24\n!con4: Connect 4\n!hang: Hangman\n!quiz: Quiz\n!tic: TicTacToe\n\nType - !{game} help - for help';
 
 	robot.hear(r.calc, function(res)  {
 		reg = /[-+]?\s*\d+\.?\d*\s*(?:[-+*%/]\s*?\d+\.?\d*\s*)+/;
@@ -30,7 +16,7 @@ module.exports = function(robot) {
 	});
 
 	robot.hear(r.help, function(res) {
-		res.send(help.replace('{0}', res.envelope.user.name));
+		res.send('```'+ help +'```');
 	});
 
 	robot.enter(function(res) {

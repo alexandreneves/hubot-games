@@ -5,6 +5,6 @@ module.exports = {
 	gameover: 'game over! the word was\n\n{0}',
 	winner: 'gratz! you won!\n\n{0}',
 	timeout: 'timeout! the word was\n\n{0}',
-	help: '*start|s*: new game\n*play|p*: play (letter)\n*guess|g*: guess (word)\n*{empty}*: help | game state\n*stats*: stats',
+	help: 'start:s: new game\nplay:p: play (letter)\nguess:g: guess (word)\n{empty}: help | game state\nstats: stats',
 	oneminleft: 'one minute left'
 };

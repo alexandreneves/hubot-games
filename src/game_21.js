@@ -24,7 +24,7 @@ module.exports = function(robot) {
 	};
 
 	robot.hear(r.help, function(res) {
-		res.send(messages.help);
+		res.send('```'+ messages.help +'```');
 	});
 
 	robot.hear(r.start, function(res) {
@@ -50,7 +50,7 @@ module.exports = function(robot) {
 			if (typeof data[p].bank !== 'undefined') payload += p +': '+ data[p].bank +'\n';
 		}
 
-		res.send(payload);
+		res.send(payload.lenght ? payload : messages.bankEmpty);
 	});
 
 	robot.hear(r.stats, function(res) {
