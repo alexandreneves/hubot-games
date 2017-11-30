@@ -195,15 +195,13 @@ module.exports = function() {
 		state.bank = getBankBalance();
 		state.bet = getBet();
 
-		if (state.bet < state.defaults.bet) {
+		if (state.bank < state.defaults.bet) { // user has insufficient funds
+			// give 5 credit
+			state.res.send(messages.insufficientFunds);
+
+		} else if (state.bet < state.defaults.bet) { // check if bet is valid
 			end();
 			return ['reply', messages.betInvalid];
-		}
-
-		// check funds
-		if (state.bet > state.bank) {
-			end();
-			return ['reply', messages.insufficientFunds];
 		}
 
 		// update bank
