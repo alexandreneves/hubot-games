@@ -64,7 +64,7 @@ module.exports = function() {
 		if (countPlayer > countDealer) return playerWin(); // player has better hand
 		if (countDealer > countPlayer) return playerLose(); // dealer has better hand
 		if (countPlayer === countDealer) {
-			if (countPlayer === 21) { // check for blackjacks
+			if (countPlayer === 21) { // check blackjacks
 				var cardsPlayer = state.hand.player.length;
 				var cardsDealer = state.hand.dealer.length;
 
@@ -158,11 +158,7 @@ module.exports = function() {
 	var dealerMove = function() {
 		while (getCount(state.hand.dealer) < 17) {
 			state.hand.dealer.push(getCard());
-
-			if (dealerHasS17()) {
-				state.hand.dealer.push(getCard());
-				break;
-			}
+			if (dealerHasS17()) state.hand.dealer.push(getCard());
 		}
 
 		return getWinner();
@@ -178,7 +174,7 @@ module.exports = function() {
 		if (typeof end !== 'undefined') {
 			draw += '\n\n';
 			if (result === 0) {
-				if (getCount(state.hand.player) === 21 && state.hand.player.length === 2) {
+				if (hasBlackjack(state.hand.player)) {
 					draw += messages.win21;
 				} else {
 					draw += messages.win;
