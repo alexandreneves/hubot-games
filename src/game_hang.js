@@ -1,5 +1,7 @@
 // Author
 // aneves, centeno
+//
+// variations: no hole card
 
 module.exports = function(robot) {
 	var messages = require('./games/hang/messages');

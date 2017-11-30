@@ -197,14 +197,14 @@ module.exports = function() {
 		state.hand.player.push(getCard());
 		state.hand.dealer.push(getCard());
 		state.hand.player.push(getCard());
-		state.hand.dealer.push(getCard());
+		// state.hand.dealer.push(getCard());
 
 		var countPlayer = getCount(state.hand.player);
-		var countDealer = getCount(state.hand.dealer);
+		// var countDealer = getCount(state.hand.dealer);
 
-		if (countPlayer === 21 && countDealer === 21) return playerPush();
+		// if (countPlayer === 21 && countDealer === 21) return playerPush();
 		if (countPlayer === 21) return playerWin(2.5);
-		if (countDealer === 21) return playerLose();
+		// if (countDealer === 21) return playerLose();
 
 		return ['send', draw()];
 	};
