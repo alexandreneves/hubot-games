@@ -11,7 +11,7 @@ module.exports = function(robot) {
 		timeout: {
 			time: 5 * 60 * 1000,
 			callback: function(res) {
-				res.reply(messages.timeout.replace('{0}', session.gameInstance(res).wordOutput(true)));
+				res.reply(messages.timeout + session.gameInstance(res).state(res, true));
 				stats.update('hang', {
 					player: res.envelope.user.name,
 					type: 0
@@ -36,7 +36,7 @@ module.exports = function(robot) {
 
 	robot.hear(r.help, function(res) {
 		if (session.gameInstance(res)) {
-			var r = session.state(res);
+			var r = session.action('state', res);
 			res[r[0]](r[1]);
 		} else {
 			res.send('```'+ messages.help +'```');
