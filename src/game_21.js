@@ -51,8 +51,10 @@ module.exports = function(robot) {
 		for (var p in data) {
 			if (typeof data[p].bank !== 'undefined') payload += p +': '+ data[p].bank +'\n';
 		}
+		
+		payload = '```'+ payload  +'```';
 
-		res.send(payload ? payload : messages.bankEmpty);
+		res.reply(payload ? payload : messages.bankEmpty);
 	});
 
 	robot.hear(r.stats, function(res) {

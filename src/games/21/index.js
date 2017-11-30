@@ -128,7 +128,7 @@ module.exports = function() {
 		updateBank();
 		updateStats(0);
 		end();
-		return ['send', draw(end, 0)];
+		return ['reply', draw(end, 0)];
 	}
 
 	var playerPush = function() {
@@ -136,14 +136,14 @@ module.exports = function() {
 		updateBank();
 		updateStats(1);
 		end();
-		return ['send', draw(end, 1)];
+		return ['reply', draw(end, 1)];
 	}
 
 	var playerLose = function() {
 		updateBank();
 		updateStats(2);
 		end();
-		return ['send', draw(end, 2)];
+		return ['reply', draw(end, 2)];
 	}
 
 	var dealerMove = function() {
@@ -169,8 +169,6 @@ module.exports = function() {
 
 		if (typeof end !== 'undefined') {
 			draw += '\n\n';
-			draw += '@'+ getPlayerName() +' ';
-
 			if (result === 0) {
 				if (getCount(state.hand.player) === 21 && state.hand.player.length === 2) {
 					draw += messages.win21;
@@ -199,7 +197,7 @@ module.exports = function() {
 
 		if (state.bank < state.defaults.bet) { // user has insufficient funds
 			state.credit = true; // default bet credited
-			state.res.send(messages.insufficientFunds);
+			state.res.reply(messages.insufficientFunds);
 		} else if (state.bet < state.defaults.bet) { // check if bet is valid
 			end();
 			return ['reply', messages.betInvalid];
@@ -219,7 +217,7 @@ module.exports = function() {
 		// check for blackjack
 		if (getCount(state.hand.player) === 21) return dealerMove();
 
-		return ['send', draw()];
+		return ['reply', draw()];
 	};
 
 	var hit = function(res) {
@@ -233,7 +231,7 @@ module.exports = function() {
         if (count > 21) return playerLose();
 		if (count === 21) return dealerMove();
 
-		return ['send', draw()];
+		return ['reply', draw()];
 	}
 
 	var stand = function(res) {
