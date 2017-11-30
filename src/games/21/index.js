@@ -146,15 +146,19 @@ module.exports = function() {
 		return ['reply', draw(end, 2)];
 	}
 
+	var dealerHasS17 = function() {
+		var aces = ((state.hand.dealer.join('')).match(/a/ig) || []);
+		return getCount(state.hand.dealer) === 17 && aces.length === 1;
+	}
+
 	var dealerMove = function() {
 		while (getCount(state.hand.dealer) < 17) {
 			state.hand.dealer.push(getCard());
-		}
 
-		// check for s17
-		var acesCount = ((state.hand.dealer.join('')).match(/a/ig) || []).length;
-		if (getCount(state.hand.dealer) === 17 && acesCount === 1) {
-			state.hand.dealer.push(getCard());
+			if (dealerHasS17()) {
+				state.hand.dealer.push(getCard());
+				break;
+			}
 		}
 
 		return getWinner();
