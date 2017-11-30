@@ -122,13 +122,9 @@ module.exports = function(payload) {
 		return getGameInstance(res)[action](res);
 	};
 
-	var state = function(res) {
-		return hasSession(res) ? getGameInstance(res).state() : false;
-	};
-
 	var gameInstance = function(res) {
 		return hasSession(res) ? getGameInstance(res) : false;
 	}
 
-	return { start, join, action, state, gameInstance };
+	return { start, join, action, gameInstance };
 }
