@@ -108,6 +108,10 @@ module.exports = function() {
 		return typeof bet === 'undefined' ? state.defaults.bet : parseInt(bet);
 	}
 
+	var hasBlackjack = function(hang) {
+		return getCount(hand) === 21 && hand.length === 2;
+	}
+
 	var updateBank = function() {
 		var data = db.get('21', getPlayerName());
 		data.bank = state.bank;
@@ -123,7 +127,7 @@ module.exports = function() {
 	}
 
 	var playerWin = function() {
-		var multiplier = getCount(state.hand.player) === 21 ? 2.5 : 2;
+		var multiplier = hasBlackjack(state.hand.player) ? 2.5 : 2;
 		state.bank += state.bet * multiplier;
 		updateBank();
 		updateStats(0);
