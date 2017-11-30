@@ -246,6 +246,8 @@ module.exports = function() {
 	var double = function(res) {
 		state.res = res;
 
+		if (state.credit) return ['reply', messages.doubleCredited];
+
 		// update bank & bet
 		state.bank = state.bank - state.bet;
 		state.bet *= 2;
