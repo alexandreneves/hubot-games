@@ -275,6 +275,15 @@ module.exports = function() {
 
 	var surrender = function(res) {
 		state.res = res;
+
+		state.bet = state.bet / 2;
+		state.bank += state.bet;
+
+		updateBank();
+		updateStats(3);
+		end();
+
+		return ['reply', messages.surrender.replace('{0}', state.bet)];
 	}
 
 	return { start, hit, stand, double, split, insurance, surrender };

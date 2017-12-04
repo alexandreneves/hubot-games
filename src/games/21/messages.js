@@ -9,5 +9,6 @@ module.exports = {
 	betInvalid: 'bet not allowed',
 	creditDeducted: ' (credit deducted)',
 	double: 'doubled, bet: {0}',
-	doubleCredited: 'cannot double when credited'
+	doubleCredited: 'cannot double when credited',
+	surrender: 'half bet returned: {0}'
 };

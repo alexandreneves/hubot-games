@@ -59,11 +59,11 @@ module.exports = function(robot) {
 	// 	var r = session.action('insurance', res);
 	// 	res[r[0]](r[1]);
 	// });
-	//
-	// robot.hear(r.surrender, function(res) {
-	// 	var r = session.action('surrender', res);
-	// 	res[r[0]](r[1]);
-	// });
+	
+	robot.hear(r.surrender, function(res) {
+		var r = session.action('surrender', res);
+		res[r[0]](r[1]);
+	});
 
 	robot.hear(r.bank, function(res) {
 		var data = db.get('21');
