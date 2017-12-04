@@ -8,7 +8,7 @@ module.exports = function() {
 		defaults: {
 			bank: 100,
 			bet: 5,
-			decks: 6,
+			decks: 2,
 		},
 		bet: null,
 		bank: null,

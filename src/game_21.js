@@ -1,7 +1,7 @@
 // Author
 // aneves
 //
-// variations: no hole card, dealers hits on a s17
+// variations: double deck, no hole card, dealers hits on a s17
 
 module.exports = function(robot) {
 	var messages = require('./games/21/messages');
