@@ -29,10 +29,10 @@ module.exports = function (robot) {
 	});
 
 	var r = {
-		help: /^!quiz(?:\s(help|h))?$/,
-		start: /^!quiz (start|s)$/,
-		play: /^!quiz (play|p) [1-4]{1}$/,
-		stats: /^!quiz stats?$/,
+		help: /^!quiz$/,
+		start: /^!quiz (?:start|s)$/,
+		play: /^!quiz (?:play|p)$/,
+		stats: /^!quiz stats$/,
 	};
 
 	robot.hear(r.help, function (res) {
