@@ -8,6 +8,7 @@ module.exports = function (robot) {
 
 	var session = new Session({
 		game: require('./games/quiz'),
+		players: 0,
 		timeout: {
 			time: 30 * 1000,
 			callback: function (res) {
