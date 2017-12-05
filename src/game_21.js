@@ -4,10 +4,10 @@
 // variations: double deck, no hole card, dealers hits on a s17
 
 module.exports = function(robot) {
+	var Session = require('./session');
 	var messages = require('./games/21/messages');
 	var stats = require('./stats/');
 	var db = require('./db/');
-	var Session = require('./session');
 
 	var session = new Session({
 		game: require('./games/21')
@@ -59,7 +59,7 @@ module.exports = function(robot) {
 	// 	var r = session.action('insurance', res);
 	// 	res[r[0]](r[1]);
 	// });
-	
+
 	robot.hear(r.surrender, function(res) {
 		var r = session.action('surrender', res);
 		res[r[0]](r[1]);
