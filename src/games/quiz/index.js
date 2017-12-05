@@ -54,7 +54,7 @@ module.exports = function() {
     };
 
     var messageOutput = function() {
-        var msg = '*(' + getLevelStr() + ') ' + state.currentQuestion.question + '*\n';
+        var msg = getLevelStr().toUpperCase() +': '+ state.currentQuestion.question + '\n';
         for (var i = 0; i < 4; i++) {
             msg += (i + 1) + ") " + state.answers[i] + "\n";
         }

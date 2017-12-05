@@ -31,7 +31,7 @@ module.exports = function (robot) {
 	var r = {
 		help: /^!quiz$/,
 		start: /^!quiz (?:start|s)$/,
-		play: /^!quiz (?:play|p)$/,
+		play: /^!quiz (?:play|p) [1-4]{1}$/,
 		stats: /^!quiz stats$/,
 	};
 
