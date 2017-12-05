@@ -58,7 +58,7 @@ module.exports = function() {
         for (var i = 0; i < 4; i++) {
             msg += (i + 1) + ") " + state.answers[i] + "\n";
         }
-        return msg;
+        return '```'+ msg +'```';
     };
 
     var getLevelStr = function() {

@@ -36,7 +36,7 @@ module.exports = function (robot) {
 	};
 
 	robot.hear(r.help, function (res) {
-		res.reply(messages.help);
+		res.send('```'+ messages.help +'```');
 	});
 
 	robot.hear(r.start, function (res) {
@@ -52,5 +52,4 @@ module.exports = function (robot) {
 	robot.hear(r.stats, function (res) {
 		res.send(stats.get(res, [0, 2]));
 	});
-
 }

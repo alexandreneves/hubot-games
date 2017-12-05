@@ -11,10 +11,7 @@ module.exports = function(payload) {
 	// SESSION HANDLERS
 
 	var deleteSession = function(res) {
-		console.log(res);
 		var session = getSession(res);
-		console.log('____________________________________')
-		console.log(session);
 		if (typeof session.timeout !== 'undefined') clearTimeout(session.timeout);
 		if (typeof session.interval !== 'undefined') clearInterval(session.interval);
 		delete sessions[getSessionIndex(res)];
