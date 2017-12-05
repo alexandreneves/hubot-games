@@ -1,15 +1,15 @@
 {
   "name": "hubot-games",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "",
   "author": "monkeys",
   "keywords": [
     "hubot-games",
     "hubot",
     "games",
-	"game",
+    "game",
     "bot",
-	"library",
+    "library",
     "24",
     "connect4",
     "hangman",
