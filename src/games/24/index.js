@@ -1,21 +1,22 @@
 module.exports = function() {
 	var stats = require('../../stats/');
 	var messages = require('./messages');
-	var Sequence = require('./sequence');
-	sequence = new Sequence();
 
-	gameStarted = 0;
-	seq = [0, 0, 0, 0];
-	number_top = 0;
-	number_left = 0;
-	number_right = 0;
-	number_down = 0;
+	var state = {
+		sequence: require('./sequence')(),
+		payload: null,
+		res: null,
+	}
 
-	var isFoundIn = function(term, array) {
+	var end = function() {
+		state.payload.callback(state.res);
+	}
+
+	var inArray = function(term, array) {
 		return array.indexOf(term);
 	};
 
-	var numberToText = function(number) {
+	var getNumberEmoji = function(number) {
 		if (number == 0) return ':zero:';
 		if (number == 1) return ':one:';
 		if (number == 2) return ':two:';
@@ -28,64 +29,74 @@ module.exports = function() {
 		if (number == 9) return ':nine:';
 	};
 
-	// PUBLIC METHODS
+	var getPlayerName = function() {
+		return state.res.envelope.user.name
+	}
 
-	var start = function() {
-		if (gameStarted == 1) return messages.startedAlready
+	var updateStats = function(type) {
+		stats.update({
+			game: '24',
+			player: getPlayerName(),
+			type: type
+		});
+	}
 
-		gameStarted = 1;
-		seq = sequence.get_new_sequence();
-		number_top = seq[0];
-		number_left = seq[1];
-		number_right = seq[2];
-		number_down = seq[3];
+	var draw = function() {
+		var empty = ':white_small_square:';
+		var nTop = state.sequence[0];
+		var nLeft = state.sequence[1];
+		var nRight = state.sequence[2];
+		var nDown = state.sequence[3];
 
 		var str = '';
-		str += ':white_small_square: ' + numberToText(number_top) + ' :white_small_square:\n';
-		str += numberToText(number_left) + ' :white_small_square: ' + numberToText(number_right) + '\n';
-		str += ':white_small_square: ' + numberToText(number_down) + ' :white_small_square:\n';
+		str += empty + getNumberEmoji(nTop) + empty +'\n';
+		str += getNumberEmoji(nLeft) + empty + getNumberEmoji(nRight) + '\n';
+		str += empty + getNumberEmoji(nDown) + empty +'\n';
 
 		return str;
+	}
+
+	// PUBLIC METHODS
+
+	var start = function(res, payload) {
+		state.res = res;
+		state.payload = payload;
+		return ['send', draw()];
 	};
 
 	var play = function(res) {
-		if (gameStarted != 1) return;
+		state.res = res;
 
-		var found = res.match[1].match(/(\d)+/g);
+		var eq = res.match[1];
+		var numbers = eq.match(/(\d)+/g);
 
-		if (found.length != 4) return messages.invalidMove + " because you must provide exactly 4 numbers";
+		if (numbers.length !== 4) return ['reply', messages.invalidMoveFour];
 
-		var test_seq = seq.slice(0); // make a copy of the sequence array
+		var seq = state.sequence.slice(0);
 
-		for(var i = 0; i < found.length; i++) {
-			if (isFoundIn(parseInt(found[i]), test_seq) == -1) {
-				return messages.invalidMove + 'at index ' + i+1;
-			}
-			test_seq.splice(test_seq.indexOf(parseInt(found[i])), 1)
+		for (var i = 0, len = numbers.length; i < len; i++) {
+			if (inArray(parseInt(numbers[i]), seq) == -1) return ['replu', messages.invalidMoveIndex.replace('{0}', i + 1)];
+			seq.splice(seq.indexOf(parseInt(numbers[i])), 1);
 		}
 
 		var str;
 
-		if (eval(res.match[1]) == 24) {
-			str = res.match[1] + ' == 24!\n'
-			str += ':fireworks: ' + res.message.user.name + ' is victorious. Saving statistics to brain.'
-			stats.update('24', {
-				player: res.message.user.name,
-				type: 0
-			});
+		if (eval(eq) == 24) {
+			str = eq + ' == 24! ' + messages.win;
+			updateStats(0)
+			end();
 		} else {
-			str = res.match[1] + ' == ' + eval(res.match[1]) + ' != 24\n'
-			str += ':dizzy_face: :dizzy_face: :dizzy_face:  ' + res.message.user.name + ' loses. Saving statistics to brain.'
-			stats.update('24', {
-				player: res.message.user.name,
-				type: 2
-			});
+			str = eq +' == '+ eval(eq) +' != 24 '+ messages.lose;
+			updateStats(2)
 		}
 
-		gameStarted = 0;
-
-		return str;
+		return ['reply', str];
 	};
 
-	return { start, play };
+	var status = function(res) {
+		state.res = res;
+		return ['send', draw()];
+	}
+
+	return { start, play, status };
 }
