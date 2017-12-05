@@ -39,10 +39,11 @@ module.exports = function(payload) {
 	var getSession = function(res) {
 		var player = getPlayerName(res);
 
-		if (typeof sessions[player] !== 'undefined') return sessions[player];
+		if (typeof sessions[player] !== 'undefined') return sessions[player]; // if player started a session
 
 		for (var s in sessions) {
-			if (sessions[s].players.indexOf(player) +1) return sessions[s];
+			if (sessions[s].forAll === true) return sessions[s]; // if forAll session is found
+			if (sessions[s].players.indexOf(player) +1) return sessions[s]; // if player is in a multiplayer session
 		}
 
 		return false;
@@ -76,11 +77,19 @@ module.exports = function(payload) {
 		return false;
 	}
 
+	var findSessionForAll = function(res) {
+		for (var s in sessions) {
+			if (sessions[s].forAll) return sessions[s];
+		}
+		return false;
+	}
+
 	// PUBLIC METHODS
 
 	var start = function(res) {
 		if (hasSession(res)) return ['reply', messages.sessionFound];
 		if (findWaitingSession(res)) return ['reply', messages.sessionWaitingForPlayers];
+		if (findSessionForAll(res)) return ['reply', messages.sessionFound];
 
 		sessions[getPlayerName(res)] = {
 			instance: new game(),
@@ -89,6 +98,7 @@ module.exports = function(payload) {
 			timestamp: new Date(),
 			players: [],
 			isWaitingForPlayers: numberOfPlayers > 1 ? true : false,
+			forAll: numberOfPlayers === 0
 		};
 
 		return getGameInstance(res).start(res, {
@@ -113,6 +123,8 @@ module.exports = function(payload) {
 	};
 
 	var action = function(action, res) {
+		if (findSessionForAll(res)) return getGameInstance(res)[action](res);
+
 		if (!hasSession(res)) return ['reply', messages.sessionNotFound];
 
 		var session = getSession(res);
