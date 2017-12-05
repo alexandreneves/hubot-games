@@ -142,11 +142,11 @@ module.exports = function() {
 		}
 	};
 
-	var state = function(res, complete) {
+	var status = function(res, complete) {
 		state.res = res;
 		complete = typeof complete !== 'undefined' ? complete : false;
 		return ['reply', drawState(complete)];
 	};
 
-	return { start, play, state };
+	return { start, play, status };
 }

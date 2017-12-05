@@ -36,7 +36,7 @@ module.exports = function(robot) {
 
 	robot.hear(r.help, function(res) {
 		if (session.gameInstance(res)) {
-			var r = session.action('state', res);
+			var r = session.action('status', res);
 			res[r[0]](r[1]);
 		} else {
 			res.send('```'+ messages.help +'```');
