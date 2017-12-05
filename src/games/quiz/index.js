@@ -1,19 +1,20 @@
 module.exports = function() {
     var shuffle = require('knuth-shuffle').knuthShuffle;
     var stats = require('../../stats/');
+	var messages = require('./messages');
+
     questions = {
         easy: require('./questions/easy'),
         medium: require('./questions/medium'),
         hard: require('./questions/hard')
     };
-    var messages = require('./messages');
 
     var state = {
-		player: null,
         level: 1,
         currentQuestion: {},
         answers: [],
-		payload: null
+		payload: null,
+		res: null,
     };
 
     var generateRandomLevel = function() {
@@ -21,7 +22,9 @@ module.exports = function() {
     };
 
     var getQuestion = function() {
-        var randomQuestion = {}, pos = 0;
+        var randomQuestion = {};
+		var pos = 0;
+
         switch (state.level) {
             case 1:
                 pos = Math.floor(Math.random() * questions.easy.length);
@@ -40,6 +43,7 @@ module.exports = function() {
                 randomQuestion = questions.medium[pos];
                 break;
         }
+
         return randomQuestion;
     };
 
@@ -54,67 +58,56 @@ module.exports = function() {
         for (var i = 0; i < 4; i++) {
             msg += (i + 1) + ") " + state.answers[i] + "\n";
         }
-
         return msg;
     };
 
     var getLevelStr = function() {
-        var lvlStr = '';
-
-        switch (state.level) {
-            case 1:
-                lvlStr = 'Easy';
-                break;
-            case 2:
-                lvlStr = 'Medium';
-                break;
-            case 3:
-                lvlStr = 'Hard';
-                break;
-            case 2:
-                lvlStr = 'Medium';
-                break;
-        }
-
-        return lvlStr;
+		if (state.level === 1) return 'Easy';
+		if (state.level === 2) return 'Medium';
+		if (state.level === 3) return 'Hard';
+		if (state.level === 4) return 'Medium';
     };
 
     var checkAnswer = function(guess) {
-        return (state.answers[--guess] === state.currentQuestion.correct_answer) ? true : false;
+        return state.answers[--guess] === state.currentQuestion.correct_answer;
     };
 
-    var end = function(res) {
-		state.payload.callback(res);
+    var end = function() {
+		state.payload.callback(state.res);
 	};
 
     // PUBLIC METHODS
 
     var start = function(res, payload) {
-        
-        state.player = res.envelope.user.name;
-        //state.level = (typeof level === 'undefined') ? generateRandomLevel() : level;
+		state.res = res;
+		state.payload = payload;
+
         state.level = generateRandomLevel();
         state.currentQuestion = getQuestion();
-        sortAnswers();
-        state.payload = payload;
-        
-        return ['send', messageOutput()];
+
+		sortAnswers();
+
+		return ['send', messageOutput()];
     };
 
     var play = function(res) {
+		state.res = res;
+
         var payload = res.match[0].split(' ')[2];
         var guess = res.match[0].trim().split('!quiz p ')[1];
         var result = checkAnswer(parseInt(guess));
 
         stats.update({
             game: 'quiz',
-            player: state.player,
+            player: res.envelope.user.name,
             type: result ? 0 : 2
         });
 
-        end(res);
-        return (result) ? ['reply', messages.correctAnswer] : 
-        ['reply', messages.gameOver.replace('{0}', state.currentQuestion.correct_answer)];
+        end();
+
+        return (result)
+			? ['reply', messages.correctAnswer]
+			: ['reply', messages.gameOver.replace('{0}', state.currentQuestion.correct_answer)];
     };
 
     var answerOutput = function() {

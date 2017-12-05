@@ -11,7 +11,10 @@ module.exports = function(payload) {
 	// SESSION HANDLERS
 
 	var deleteSession = function(res) {
+		console.log(res);
 		var session = getSession(res);
+		console.log('____________________________________')
+		console.log(session);
 		if (typeof session.timeout !== 'undefined') clearTimeout(session.timeout);
 		if (typeof session.interval !== 'undefined') clearInterval(session.interval);
 		delete sessions[getSessionIndex(res)];
@@ -54,6 +57,7 @@ module.exports = function(payload) {
 		if (typeof sessions[player] !== 'undefined') return player;
 
 		for (var s in sessions) {
+			if (sessions[s].forAll === true) return s;
 			if (sessions[s].players.indexOf(player) +1) return s;
 		}
 	}
