@@ -2,21 +2,21 @@
 // aneves, tiagocunha
 
 module.exports = function(robot) {
-	var messages = require('./games/con/messages');
+	var messages = require('./games/cf/messages');
 	var stats = require('./stats/');
 	var Session = require('./session');
 
 	var session = new Session({
-		game: require('./games/con'),
+		game: require('./games/cf'),
 		players: 2
 	});
 
 	var r = {
-		help: /^!con$/,
-		start: /^!con (?:start|s)$/,
-		join: /^!con (?:join|j)$/,
-		play: /^!con (?:play|p) ([1-7]{1})$/,
-		stats: /^!con stats$/,
+		help: /^!cf$/,
+		start: /^!cf (?:start|s)$/,
+		join: /^!cf (?:join|j)$/,
+		play: /^!cf (?:play|p) ([1-7]{1})$/,
+		stats: /^!cf stats$/,
 	};
 
 	robot.hear(r.help, function(res) {

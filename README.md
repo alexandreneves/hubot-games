@@ -17,12 +17,12 @@ external-scripts.json:
 
 ## GAMES
 
-- Blackjack
+- Blackjack (21)
 - 24
-- Connect 4
-- Hangman
-- Quiz
-- TicTacToe
+- Connect Four (cf)
+- Hangman (hang)
+- Quiz (quiz)
+- TicTacToe (tic)
 
 ## CMDS
 
@@ -32,7 +32,7 @@ external-scripts.json:
 *Games*:
 - !21
 - !24
-- !con4
+- !cf
 - !hang
 - !quiz
 - !tic

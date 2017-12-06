@@ -7,7 +7,7 @@ module.exports = function(robot) {
 		help: /^!help/g,
 	};
 
-	var help = '!calc: Calculator (e.g. !calc 1+1)\n\n!21: Blackjack\n!24: 24\n!con: Connect 4\n!hang: Hangman\n!quiz: Quiz\n!tic: TicTacToe\n\nType - !{game} help - for help';
+	var help = '!calc: Calculator (e.g. !calc 1+1)\n\n!21: Blackjack\n!24: 24\n!cf: Connect Four\n!hang: Hangman\n!quiz: Quiz\n!tic: TicTacToe\n\nType - !{game} help - for help';
 
 	robot.hear(r.calc, function(res)  {
 		reg = /[-+]?\s*\d+\.?\d*\s*(?:[-+*%/]\s*?\d+\.?\d*\s*)+/;

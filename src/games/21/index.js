@@ -202,7 +202,7 @@ module.exports = function() {
 		if (state.bank < state.defaults.bet) { // user has insufficient funds
 			state.credit = true; // default bet credited
 			state.bet = state.defaults.bet;
-			state.res.reply(messages.insufficientFunds);
+			state.res.reply(messages.credit);
 		} else if (state.bet > state.bank || state.bet < state.defaults.bet) { // check if bet is valid
 			end();
 			return ['reply', messages.betInvalid];
