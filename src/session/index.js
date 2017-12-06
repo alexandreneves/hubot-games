@@ -1,3 +1,6 @@
+// Author
+// aneves
+
 module.exports = function(payload) {
 	var messages = require('./messages');
 	var sessions = {};

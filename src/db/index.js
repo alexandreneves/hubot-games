@@ -1,3 +1,6 @@
+// Author
+// aneves
+
 module.exports = new function() {
 	var rw = require('../rw/');
 	var db = 'db.json';

@@ -1,5 +1,5 @@
 // Author
-// Monkeys
+// centeno
 
 module.exports = function (robot) {
 	var messages = require('./games/quiz/messages');

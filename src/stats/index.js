@@ -1,3 +1,6 @@
+// Author
+// aneves
+
 module.exports = new function() {
 	var db = require('../db/');
 

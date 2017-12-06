@@ -1,3 +1,6 @@
+// Author
+// aneves
+
 module.exports = new function() {
     var fs = require('fs');
 	var path = require('path');
