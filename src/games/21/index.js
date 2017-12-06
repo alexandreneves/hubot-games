@@ -248,6 +248,7 @@ module.exports = function() {
 		state.res = res;
 
 		if (state.credit) return ['reply', messages.doubleCredited];
+		if (state.bet > state.bank) return ['reply', messages.insufficientFunds];
 
 		// update bank & bet
 		state.bank = state.bank - state.bet;
