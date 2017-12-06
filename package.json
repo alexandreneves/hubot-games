@@ -1,19 +1,18 @@
 {
   "name": "hubot-games",
   "version": "0.1.5",
-  "description": "",
+  "description": "game library for your (hu)bot",
   "author": "monkeys",
   "keywords": [
     "hubot-games",
     "hubot",
-    "games",
-    "game",
+    "games game",
     "bot",
     "library",
-    "24",
-    "connect4",
+    "24 maths maths24",
+    "connect plot find four up row line gravitrips captain mistress",
     "hangman",
-    "tictactoe"
+    "tic tac toe tic-tac-toe tictactoe"
   ],
   "main": "index.coffee",
   "license": "ISC",
