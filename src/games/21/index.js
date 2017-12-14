@@ -104,7 +104,7 @@ module.exports = function() {
 	}
 
 	var getBet = function() {
-		var bet = (state.res.match[0]).match(/^!21 (?:start|s)(\s[0-9]*)?$/)[1];
+		var bet = state.res.match[1];
 		return typeof bet === 'undefined' ? state.defaults.bet : parseInt(bet);
 	}
 

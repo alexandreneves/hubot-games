@@ -15,7 +15,7 @@ module.exports = function(robot) {
 
 	var r = {
 		help: /^!21$/,
-		start: /^!21 (?:start|s)(?:\s[0-9]*)?$/,
+		start: /^!21 (?:start|s)(?:\s([0-9]+))?$/,
 		hit: /^!21 (?:hit|h)$/,
 		stand: /^!21 (?:stand|st)$/,
 		double: /^!21 (?:double|d)$/,
