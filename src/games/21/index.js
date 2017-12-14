@@ -6,7 +6,7 @@ module.exports = function() {
 
 	var state = {
 		defaults: {
-			bank: 100,
+			bank: 1000,
 			bet: 5,
 			decks: 2,
 		},
