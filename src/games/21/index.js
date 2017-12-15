@@ -78,20 +78,25 @@ module.exports = function() {
 		}
 	}
 
-	var getCount = function(hand) {
+	var getCount = function(hand, s17state) {
 		var count = 0;
+		var isSoft = true;
+		var hasAces = hand.indexOf('A') !== -1;
 
 		for (var i = 0, len = hand.length;  i < len; i++) {
 			count += getCardValue(hand[i]);
 		}
 
 		// aces check (1 vs 11)
-		if (hand.indexOf('A') !== -1 && count > 21) {
+		if (hasAces && count > 21) {
 			var aces = hand.filter(function(v) { return v === 'A'; });
 			count = count - (aces.length * 10);
+			isSoft = false;
 		}
 
-		return count;
+		return s17state
+			? [count, count === 17 && hasAces && isSoft]
+			: count;
 	}
 
 	var getPlayerName = function() {
@@ -151,8 +156,7 @@ module.exports = function() {
 	}
 
 	var dealerHasS17 = function() {
-		var aces = ((state.hand.dealer.join('')).match(/a/ig) || []);
-		return getCount(state.hand.dealer) === 17 && aces.length === 1;
+		return getCount(state.hand.dealer, true)[1];
 	}
 
 	var dealerMove = function() {
