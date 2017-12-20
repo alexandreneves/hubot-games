@@ -140,14 +140,14 @@ module.exports = function() {
 		if (rowsWin() || colsWin() || diagWin()) {
 			// winner
 			stats.update({
-				game: 'con',
+				game: 'cf',
 				player: state.players[state.turn],
 				type: 0
 			});
 
 			// looser
 			stats.update({
-				game: 'con',
+				game: 'cf',
 				player: state.players[!state.turn ? 1 : 0],
 				type: 2
 			});

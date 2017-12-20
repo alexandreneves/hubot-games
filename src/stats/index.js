@@ -29,7 +29,7 @@ module.exports = new function() {
 		var game = (res.match[0]).match(/^!(.+)\s/)[1];
 		var stats = parseStats(db.get(game));
 
-		if (!stats) return 'not stats found for this game';
+		if (!stats) return 'no stats found for this game';
 
 		var payload = '';
 
