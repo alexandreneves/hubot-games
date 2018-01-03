@@ -19,8 +19,8 @@ module.exports = function(robot) {
 		hit: /^!21 (?:hit|h)$/,
 		stand: /^!21 (?:stand|st)$/,
 		double: /^!21 (?:double|d)$/,
-		split: /^!21 (?:split|sp)$/,
-		insurance: /^!21 (?:insurance|i)$/,
+		// split: /^!21 (?:split|sp)$/,
+		// insurance: /^!21 (?:insurance|i)$/,
 		surrender: /^!21 (?:surrender|su)$/,
 		bank: /^!21 bank$/,
 		stats: /^!21 stats$/,
@@ -73,7 +73,7 @@ module.exports = function(robot) {
 			if (typeof data[p].bank !== 'undefined') payload += p +': '+ data[p].bank +'\n';
 		}
 
-		res.reply(payload ? '```'+ payload  +'```' : messages.bankEmpty);
+		res.send(payload ? '```'+ payload  +'```' : messages.bankEmpty);
 	});
 
 	robot.hear(r.stats, function(res) {
