@@ -44,7 +44,7 @@ Type ```!{game} help``` for help.
 A series of modules were also developed to improve game development.
 
 - **session**: controls the session/instance of every game; supports multiplayer
-- **stats**: takes care of all stat (W, D & L) actions
+- **stats**: takes care of all stat (*W*in, *T*ie, *L*oss & *S*ubmission) actions
 - **db**: takes care of all the database actions
 - **rw**: reads & writes a unique JSON file that works as the DB
 
