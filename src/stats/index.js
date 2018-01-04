@@ -11,12 +11,12 @@ module.exports = new function() {
 			if (data[k].stats === 'undefined') continue;
 
 			payload.push({
-				p: k,
-				t: data[k].stats.w + data[k].stats.t + data[k].stats.l,
-				w: data[k].stats.w,
-				t: data[k].stats.t,
-				l: data[k].stats.l,
-				s: data[k].stats.s
+				player: k,
+				win: data[k].stats.w,
+				tie: data[k].stats.t,
+				loss: data[k].stats.l,
+				submission: data[k].stats.s,
+				total: data[k].stats.w + data[k].stats.t + data[k].stats.l + data[k].stats.s
 			});
 		}
 
@@ -37,13 +37,13 @@ module.exports = new function() {
 
 		for (var i = 0, len = stats.length; i < len; i++) {
 			var r = stats[i];
-			payload += r.p;
+			payload += r.player;
 			payload += ', ';
-			payload += r.t +' Games';
-			if (types.indexOf(0) +1) payload += ' / '+ r.w +' W';
-			if (types.indexOf(1) +1) payload += ' / '+ r.t +' T';
-			if (types.indexOf(2) +1) payload += ' / '+ r.l +' L';
-			if (types.indexOf(3) +1) payload += ' / '+ r.s +' S';
+			payload += r.total +' Games';
+			if (types.indexOf(0) +1) payload += ' / '+ r.win +' W';
+			if (types.indexOf(1) +1) payload += ' / '+ r.tie +' T';
+			if (types.indexOf(2) +1) payload += ' / '+ r.loss +' L';
+			if (types.indexOf(3) +1) payload += ' / '+ r.submission +' S';
 			payload += '\n';
 		}
 
