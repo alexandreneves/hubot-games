@@ -28,6 +28,7 @@ external-scripts.json:
 
 - !help
 - !calc {calc} - e.g. !calc 1+1(2)-3
+- !lmgtfy {string}
 
 *Games*:
 - !21
