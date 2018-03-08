@@ -4,6 +4,7 @@
 module.exports = function(robot) {
 	var r = {
 		calc: /^!calc .+/g,
+		lmgtfy: /^!lmgtfy ([\w\d\s]+)/g,
 		help: /^!help/g,
 	};
 
@@ -13,6 +14,10 @@ module.exports = function(robot) {
 		reg = /[-+]?\s*\d+\.?\d*\s*(?:[-+*%/]\s*?\d+\.?\d*\s*)+/;
 		str = res.message.text.split('calc ')[1];
 		if (reg.test(str)) res.reply(str +' = '+ eval(str));
+	});
+
+	robot.hear(r.lmgtfy, function(res) {
+		res.send('http://lmgtfy.com/?q='+ encodeURIComponent(res.match[0]));
 	});
 
 	robot.hear(r.help, function(res) {
