@@ -5,7 +5,7 @@ module.exports = function(robot) {
 	var r = {
 		calc: /^!calc .+/g,
         lmgtfy: /^!lmgtfy [\w\d\s]+/g,
-        mom: /^!mom (@.[\w\d]+)/g,
+        mom: /^!mom (@[0-9a-zA-Z-_.]+)/g,
 		help: /^!help/g,
 	};
 
