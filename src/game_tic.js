@@ -1,4 +1,4 @@
-// Author
+// Author:
 // aneves, centeno
 
 module.exports = function(robot) {

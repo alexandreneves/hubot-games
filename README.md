@@ -1,6 +1,6 @@
 # HUBOT GAMES
 
-Game library for your (hu)bot! Hangman, Blackjack, TicTacToe, Quiz, 24, ...!
+Game library for your (hu)bot!
 
 ## INSTALL
 
@@ -15,30 +15,14 @@ external-scripts.json:
 ]
 ```
 
-## GAMES
+## GAMES & CMDS
 
-- Blackjack (21)
-- 24
-- Connect Four (cf)
-- Hangman (hang)
-- Quiz (quiz)
-- TicTacToe (tic)
-
-## CMDS
-
-- !help
-- !calc {calc} - e.g. !calc 1+1(2)-3
-- !lmgtfy {string}
-
-*Games*:
-- !21
-- !24
-- !cf
-- !hang
-- !quiz
-- !tic
-
-Type ```!{game} help``` for help.
+- !21 - Blackjack (21)
+- !24 - 24
+- !cf - Connect Four (cf)
+- !hang - Hangman (hang)
+- !quiz - Quiz (quiz)
+- !tic - TicTacToe (tic)
 
 ## MODULES
 

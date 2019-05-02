@@ -1,4 +1,4 @@
-// Author
+// Author:
 // aneves
 
 module.exports = new function() {
@@ -12,9 +12,7 @@ module.exports = new function() {
 
 		if (typeof data === 'undefined') return {};
 		if (typeof data[game] === 'undefined') return {};
-
 		if (typeof player === 'undefined') return data[game];
-
 		if (typeof data[game][player] === 'undefined') return {};
 
 		return data[game][player];

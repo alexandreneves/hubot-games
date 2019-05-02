@@ -1,4 +1,4 @@
-// Author
+// Author:
 // aneves
 
 // variations: double deck, no hole card, dealers hits on a s17

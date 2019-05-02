@@ -1,4 +1,4 @@
-// Author
+// Author:
 // aneves
 
 module.exports = new function() {

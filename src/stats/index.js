@@ -1,4 +1,4 @@
-// Author
+// Author:
 // aneves
 
 module.exports = new function() {
@@ -13,10 +13,10 @@ module.exports = new function() {
 			payload.push({
 				player: k,
 				win: data[k].stats.w,
-				tie: data[k].stats.t,
+				draw: data[k].stats.d,
 				loss: data[k].stats.l,
 				submission: data[k].stats.s,
-				total: data[k].stats.w + data[k].stats.t + data[k].stats.l + data[k].stats.s
+				total: data[k].stats.w + data[k].stats.d + data[k].stats.l + data[k].stats.s
 			});
 		}
 
@@ -41,7 +41,7 @@ module.exports = new function() {
 			payload += ', ';
 			payload += r.total +' Games';
 			if (types.indexOf(0) +1) payload += ' / '+ r.win +' W';
-			if (types.indexOf(1) +1) payload += ' / '+ r.tie +' T';
+			if (types.indexOf(1) +1) payload += ' / '+ r.draw +' D';
 			if (types.indexOf(2) +1) payload += ' / '+ r.loss +' L';
 			if (types.indexOf(3) +1) payload += ' / '+ r.submission +' S';
 			payload += '\n';
@@ -54,10 +54,10 @@ module.exports = new function() {
 		var data = db.get(payload.game, payload.player);
 		var type = payload.type;
 
-		if (typeof data.stats === 'undefined') data.stats = {'w': 0, 't': 0, 'l': 0, 's': 0};
+		if (typeof data.stats === 'undefined') data.stats = {'w': 0, 'd': 0, 'l': 0, 's': 0};
 
 		if (type === 0) data.stats.w++;
-		if (type === 1) data.stats.t++;
+		if (type === 1) data.stats.d++;
 		if (type === 2) data.stats.l++;
 		if (type === 3) data.stats.s++;
 
